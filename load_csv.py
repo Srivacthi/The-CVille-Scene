@@ -4,9 +4,8 @@ def load_items_from_csv(filename):
     items = []
     with open(filename, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
-        for idx, row in enumerate(reader, start=1):
+        for row in reader:
             item = {
-                'id': idx,
                 'name': row['Name'],
                 'address': row['Address'],
                 'cuisine': row['Type of Cuisine']
