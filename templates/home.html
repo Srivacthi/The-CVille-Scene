@@ -19,4 +19,21 @@
 
 <h1 class="heading heading-title">Welcome to The C'Ville Scene!</h1>
 <h4 class="heading heading-description">A place where you can discover and plan the next perfect outing in Charlottesville.</h4>
+
+<div class="form-container">
+    <form method="POST">
+        <label for="dropdown_option">What's Your Scene!</label>
+        <select name="dropdown_option" id="dropdown_option">
+            <option value="Option 1">Option 1</option>
+            <option value="Option 2">Option 2</option>
+            <option value="Option 3">Option 3</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if selected_option %}
+        <p>You selected: <strong>{{ selected_option }}</strong></p>
+    {% endif %}
+</div>
+
 {% endblock %}

@@ -11,7 +11,13 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 @app.route('/')
 @app.route('/home')
 def home_page():
-    return render_template('home.html')
+    selected_option = None
+
+    if request.method == 'POST':
+        selected_option = request.form.get('dropdown_option')  # Store selected value
+        print(f"Selected option: {selected_option}")  # Debugging
+
+    return render_template('home.html', selected_option=selected_option)
 
 @app.route('/matches')
 def match_results():
