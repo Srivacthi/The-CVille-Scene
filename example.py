@@ -7,7 +7,7 @@ completion = client.chat.completions.create(
         {"role": "system", "content": "You are a helpful assistant."},
         {
             "role": "user",
-            "content": "What are local restaurants and concerts in Charlottesville?"
+            "content": "What are events that are some events that are happening soon in Charlottesville. Here's a website for reference: https://events.c-ville.com/"
         }
     ]
 )
