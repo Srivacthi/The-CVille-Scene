@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from dotenv import load_dotenv
+from load_csv import load_items_from_csv
 import os
 
 load_dotenv()
@@ -14,7 +15,8 @@ def home_page():
 
 @app.route('/matches')
 def match_results():
-    return render_template('match-results.html')
+    items = load_items_from_csv('restaurants.csv')
+    return render_template('match-results.html', items=items)
 
 @app.route('/reviews')
 def reviews():
