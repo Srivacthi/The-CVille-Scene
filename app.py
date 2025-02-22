@@ -52,8 +52,7 @@ def home_page():
 
         print(f"Selected option: {selected_option}")  # Debugging
 
-    return render_template('match-results.html')
-    #return render_template('home.html', selected_option=selected_option)
+    return render_template('home.html', selected_option=selected_option)
 
 @app.route('/matches')
 def match_results():
