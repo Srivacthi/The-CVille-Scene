@@ -6,7 +6,9 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['OpenAI_API_KEY'] = os.getenv('OpenAI_API_KEY')
+
+reviews = []
 
 @app.route('/')
 @app.route('/home')
