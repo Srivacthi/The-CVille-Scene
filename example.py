@@ -2,12 +2,12 @@ from openai import OpenAI
 client = OpenAI()
 
 completion = client.chat.completions.create(
-    model="gpt-4o-mini",
+    model="gpt-4o",
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {
             "role": "user",
-            "content": "What are cool spots to visit in Charlottesville?"
+            "content": "What are local restaurants and concerts in Charlottesville?"
         }
     ]
 )
