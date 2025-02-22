@@ -32,10 +32,10 @@
                 <a class="nav-link {% if request.endpoint == 'home_page' %}active{% endif %}" href="{{ url_for('home_page')}}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if request.endpoint == 'about_page' %}active{% endif %}" href="{{ url_for('match_results')}}">Match Results</a>
+                <a class="nav-link {% if request.endpoint == 'match_results' %}active{% endif %}" href="{{ url_for('match_results')}}">Match Results</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if request.endpoint == 'market_page' %}active{% endif %}" href="{{ url_for('reviews')}}">Reviews</a>
+                <a class="nav-link {% if request.endpoint == 'reviews' %}active{% endif %}" href="{{ url_for('reviews')}}">Reviews</a>
             </li>         
           </ul>
           <ul class="navbar-nav">
