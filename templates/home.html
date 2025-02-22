@@ -15,6 +15,10 @@
     .heading-description {
         margin-top: 20px;
     }
+    .form-container {
+        text-align: center;
+        margin-top: 30px;
+    }
 </style>
 
 <h1 class="heading heading-title">Welcome to The C'Ville Scene!</h1>
@@ -22,7 +26,7 @@
 
 <div class="form-container">
     <form method="POST">
-        <label for="dropdown_option">What's Your Scene!</label>
+        <label for="dropdown_option">Choose an option:</label>
         <select name="dropdown_option" id="dropdown_option">
             <option value="Option 1">Option 1</option>
             <option value="Option 2">Option 2</option>
@@ -35,5 +39,4 @@
         <p>You selected: <strong>{{ selected_option }}</strong></p>
     {% endif %}
 </div>
-
 {% endblock %}
