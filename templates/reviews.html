@@ -18,7 +18,7 @@
     
     <h1>Submitted Reviews</h1>
         {% for review in reviews_table %}
-        <div style="text-align: left; min-height: 5vh; border: 2px solid #c47034ad; background-color: #ebdbcf; padding: 15px; border-radius: 10px; width: 100%; max-width: 600px; margin: 15px auto;">
+        <div style="text-align: left; min-height: 5vh; border: 2px solid #c47034ad; background-color: #ebdbcf; padding: 15px; border-radius: 10px; width: 100%; max-width: 50%; margin: 15px auto;">
             <strong>{{ review.event_name }}</strong> ({{ review.date }})  
             <span style="float: right;">⭐ {{ review.rating }}/5</span><br>
             Comments: {{ review.description }}
@@ -28,8 +28,8 @@
         {% endfor %}
         
 
-<div style="border: 2px solid #c47034ad; background-color: #ebdbcf; padding: 30px; border-radius: 12px; width: 100%; max-width: 550px;">
-    <h2 style="text-align: center; color: #333; margin-bottom: 20px;"> Submit Your Event Review </h2>
+<div style="border: 2px solid #c47034ad; background-color: #ebdbcf; padding: 30px; border-radius: 12px; width: 80%; max-width: 42%; margin-top: 20px">
+    <h2 style="text-align: center; color: #333; margin-bottom: 20px;"> Add Your Event Review </h2>
     <form method="post" style="display: flex; flex-direction: column; gap: 10px;">
         <input type="hidden" name="action" value="submit_review">
         <div style="display: flex; gap: 20px;">
