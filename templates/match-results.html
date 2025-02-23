@@ -24,7 +24,10 @@
         <tbody>
             {% for item in items %}
             <tr>
-                <td>{{ item.name }}</td>
+                <td><a href="{{ item.website }}" target="_blank" rel="noopener noreferrer">
+                    {{ item.name }}
+                    </a>
+                </td>
                 <td>{{ item.website }}</td>
                 <td>{{ item.location }}</td>
                 <td>{{ item.description }}</td>
