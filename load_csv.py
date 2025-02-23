@@ -7,13 +7,15 @@ def load_items_from_csv(filename):
         for row in reader:
             item = {
                 'name': row['Name'],
-                'address': row['Address'],
-                'cuisine': row['Type of Cuisine']
+                'website' : row['Website'],
+                'location': row['Location'],
+                'description': row['Description'],
+                'category': row['Category']
             }
             items.append(item)
     return items
 
 # Example usage
-filename = 'test_file.csv'
+filename = 'results.csv'
 items = load_items_from_csv(filename)
 print(items)

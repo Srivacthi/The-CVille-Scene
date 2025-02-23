@@ -58,7 +58,7 @@ def home_page():
 
 @app.route('/matches')
 def match_results():
-    items = load_items_from_csv('test_file.csv')
+    items = load_items_from_csv('results.csv')
     return render_template('match-results.html', items=items)
 
 @app.route('/reviews')
