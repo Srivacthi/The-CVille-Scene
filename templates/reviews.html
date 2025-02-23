@@ -16,7 +16,8 @@ body {
   align-items: center;
 }
 .title{
-    margin-top: 10%;
+    margin-top: 8%;
+    margin-bottom: -4%;
 }
 .line {
   width: 100%;
@@ -60,7 +61,17 @@ nav {
   width: 100%;
   background: white;
   z-index: 1000;
+}
 </style>
+
+<form method="POST">
+    <input type="hidden" name="action" value="sort">
+    <label for="sortBy">Sort by:</label>
+    <select name="sort_by" id="sortBy" onchange="this.form.submit()">
+        <option value="date" {% if sort_by == 'date' %} {% endif %}>Date</option>
+        <option value="ration" {% if sort_by == 'rating' %} {% endif %}>Rating</option>
+    </select>
+</form>
 
 <!--Title Animation adapted from https://www.sliderrevolution.com/resources/css-text-animation/ -->
 <div class="title">    
@@ -104,22 +115,11 @@ nav {
 </div>
 </div>
 
-<form method="POST">
-    <input type="hidden" name="action" value="sort">
-    <label for="sortBy">Sort by:</label>
-    <select name="sort_by" id="sortBy" onchange="this.form.submit()">
-        <option value="date" {% if sort_by == 'date' %} {% endif %}>Date</option>
-        <option value="ration" {% if sort_by == 'rating' %} {% endif %}>Rating</option>
-    </select>
-</form>
-
 <div style="text-align: center; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">  
-    
-    <h1>Submitted Reviews</h1>
-        {% for review in reviews_table %}
-        <div style="text-align: left; min-height: 5vh; border: 2px solid #c47034ad; background-color: #ebdbcf; padding: 15px; border-radius: 10px; width: 100%; max-width: 50%; margin: 15px auto;">
+    {% for review in reviews_table %}
+        <div style="text-align: left; min-height: 5vh; border: 2px solid #c47034ad; background-color: #f9eadf; padding: 15px; border-radius: 10px; width: 100%; max-width: 50%; margin: 15px auto;">
             <strong>{{ review.event_name }}</strong> ({{ review.date }})  
-            <span style="float: right;">⭐ {{ review.rating }}/5</span><br>
+            <span style="float: right; font-size: 1.5em;">⭐ {{ review.rating }}/5</span><br>
             Comments: {{ review.description }}
         </div>
         {% else %}
@@ -127,7 +127,7 @@ nav {
         {% endfor %}
         
 
-<div style="border: 2px solid #c47034ad; background-color: #ebdbcf; padding: 30px; border-radius: 12px; width: 80%; max-width: 42%; margin-top: 20px">
+<div style="border: 2px solid #c47034ad; background-color: #f9eadf; padding: 30px; border-radius: 12px; width: 80%; max-width: 42%; margin-top: 20px">
     <h2 style="text-align: center; color: #333; margin-bottom: 20px;"> Add Your Event Review </h2>
     <form method="post" style="display: flex; flex-direction: column; gap: 10px;">
         <input type="hidden" name="action" value="submit_review">
