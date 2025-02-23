@@ -62,7 +62,6 @@ def home_page():
         ]
         )
 
-        #store the results that openai gave in a .csv file
         openai_response = completion.choices[0].message.content
         match = re.search(r"```.*?\n(.*?)\n```", openai_response, re.DOTALL)
         csv_content = match.group(1) if match else openai_response 
@@ -72,6 +71,8 @@ def home_page():
         with open(csv_filename, mode="w", newline="") as file:
             writer = csv.writer(file)
 
+
+            # Split text into lines and write each as a row
             for line in csv_content.split("\n"):
                 writer.writerow(line.split(","))
 
@@ -84,9 +85,6 @@ def match_results():
     items = load_items_from_csv('results.csv')
     return render_template('match-results.html', items=items)
 
-# @app.route('/reviews')
-# def reviews():
-#     return render_template('reviews.html')
 
 @app.route('/reviews', methods=['GET', 'POST'])
 def reviews():
@@ -101,12 +99,10 @@ def reviews():
             elif sort_by == 'date':
                 reviews_sorted = sorted(reviews_table, key=lambda x: x['date'], reverse=True)
         elif action == 'submit_review':
-            #getting form data
             rating = request.form['rating']
             event_name = request.form['event_name']
             description = request.form['description']
             date = request.form['date']
-            #saving review
             reviews_table.append({
                 'rating': rating,
                 'event_name': event_name,
