@@ -164,7 +164,7 @@ nav {
 <h1 class="heading heading-title">Welcome to The C'Ville Scene!</h1>
 <h4 class="heading heading-description">A place where you can discover and plan the next perfect outing in Charlottesville.</h4>
 
-<div class="form-container">
+<!-- <div class="form-container">
     <form method="POST" action="/home">
         <label for="dropdown_option">Set Your Scene:</label>
         <select name="dropdown_option" id="dropdown_option">
@@ -181,38 +181,55 @@ nav {
     {% if selected_option %}
         <p>You selected: <strong>{{ selected_option }}</strong></p>
     {% endif %}
-</div>
+</div> -->
 <div class="questions-container">
-    <form id="questionnaire">
+    <form id="questionnaire" form method="POST" action="/home">
+
         <div class="question" id="q1">
-            <label>Number of People?</label><br>
-            <input type="text" id="answer1">
+            <label>Set your scene: </label><br>
+            <select id="place" name="place">
+                <option value="Restaurants">Restaurants</option>
+                <option value="Parks">Parks</option>
+                <option value="Museums">Museums</option>
+                <option value="Sporting Events">Sporting Events</option>
+                <option value="Art Galleries">Art Galleries</option>
+                <option value="Historical Sites">Historical Sites</option>
+                <option value="I don't know">I don't know</option>
+            </select>
             <button type="button" onclick="showNext(2)">Next</button>
         </div>
+        
 
         <div class="question" id="q2">
-            <label>Do you prefer indoor or outdoor activities?</label><br>
-            <input type="radio" name="activity" value="Indoor"> Indoor<br>
-            <input type="radio" name="activity" value="Outdoor"> Outdoor<br>
-            <input type="radio" name="activity" value="Either"> Either<br>
+            <label>Number of People?</label><br>
+            <input type="text" id="numPeople" name = "numPeople">
             <button type="button" onclick="showNext(3)">Next</button>
         </div>
 
         <div class="question" id="q3">
+            <label>Do you prefer indoor or outdoor activities?</label><br>
+            <input type="radio" name="activity" value="Indoor"> Indoor<br>
+            <input type="radio" name="activity" value="Outdoor"> Outdoor<br>
+            <input type="radio" name="activity" value="Either"> Either<br>
+            <button type="button" onclick="showNext(4)">Next</button>
+        </div>
+
+        <div class="question" id="q4">
             <label>What's your budget?</label><br>
             <input type="radio" name="budget" value="Free"> Free<br>
             <input type="radio" name="budget" value="$20"> Up to $20<br>
             <input type="radio" name="budget" value="$50"> Up to $50<br>
             <input type="radio" name="budget" value="$50+"> $50+<br>
-            <button type="button" onclick="showNext(4)">Next</button>
+            <button type="button" onclick="showNext(5)">Next</button>
         </div>
-        <div class="question" id="q4">
+        <div class="question" id="q5">
             <label>What day and time of day are you planning?</label><br>
-            <input type="datetime-local" id="dateTimePicker">
-            <button type="button" onclick="submitForm()">Submit</button>
-        </div>
+            <input type="datetime-local" id="dateTime" name="dateTime">
+            <button type="submit">Submit</button>
+        </div>        
     </form>
 </div>
+
 <script>
     function showNext(questionNumber) {
         document.getElementById('q' + questionNumber).style.display = 'block';
