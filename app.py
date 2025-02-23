@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from dotenv import load_dotenv
 from load_csv import load_items_from_csv
 import os
@@ -20,7 +20,9 @@ def home_page():
 
     if request.method == 'POST':
         selected_option = request.form.get('dropdown_option')  # Store selected value
-        print(selected_option)
+
+        if not selected_option:
+            return render_template('home.html', selected_option=None)
 
         #put the selected option in an openAI prompt and get the result
         client = OpenAI()
@@ -30,15 +32,16 @@ def home_page():
             {"role": "system", "content": "You are a helpful assistant."},
             {
                 "role": "user",
-                "content": "Whare are some " +  selected_option + " in Charlottesville, VA? Can I have an itemized list in the form of a csv file that has 5 features: the name of the place, a link to the place's website, the location, and description, and category?"
+                "content": "Whare are some " +  selected_option + " in Charlottesville, VA? Can I have an itemized list in the form of a CSV file with column headers: 'Name', 'Website', 'Description', 'Category', and 'Location'? Make sure the Description and Location have no commas"
             }
         ]
         )
 
         #store the results that openai gave in a .csv file
         openai_response = completion.choices[0].message.content
-        match = re.search("```.*?\n(.*?)\n```", openai_response, re.DOTALL)
-        csv_content = match.group(1)
+        match = re.search(r"```.*?\n(.*?)\n```", openai_response, re.DOTALL)
+        csv_content = match.group(1) if match else openai_response 
+
 
         # Define the filename
         csv_filename = "results.csv"
@@ -52,7 +55,7 @@ def home_page():
             for line in csv_content.split("\n"):
                 writer.writerow(line.split(","))
 
-        print(f"Selected option: {selected_option}")  # Debugging
+        return redirect(url_for('match_results'))
 
     return render_template('home.html', selected_option=selected_option)
 
