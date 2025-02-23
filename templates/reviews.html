@@ -5,7 +5,17 @@
 {% endblock %}
 
 {% block content %}
-<div style="text-align: center; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+<form method="POST">
+    <input type="hidden" name="action" value="sort">
+    <label for="sortBy">Sort by:</label>
+    <select name="sort_by" id="sortBy" onchange="this.form.submit()">
+        <option value="date" {% if sort_by == 'date' %} {% endif %}>Date</option>
+        <option value="ration" {% if sort_by == 'rating' %} {% endif %}>Rating</option>
+    </select>
+</form>
+
+<div style="text-align: center; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">  
+    
     <h1>Submitted Reviews</h1>
         {% for review in reviews_table %}
         <div style="text-align: left; min-height: 5vh; border: 2px solid #c47034ad; background-color: #ebdbcf; padding: 15px; border-radius: 10px; width: 100%; max-width: 600px; margin: 15px auto;">
@@ -16,10 +26,12 @@
         {% else %}
             <p>No reviews yet. Be the first to add one!</p>
         {% endfor %}
+        
 
 <div style="border: 2px solid #c47034ad; background-color: #ebdbcf; padding: 30px; border-radius: 12px; width: 100%; max-width: 550px;">
     <h2 style="text-align: center; color: #333; margin-bottom: 20px;"> Submit Your Event Review </h2>
     <form method="post" style="display: flex; flex-direction: column; gap: 10px;">
+        <input type="hidden" name="action" value="submit_review">
         <div style="display: flex; gap: 20px;">
             <div>
                 <label>Event name:</label>
