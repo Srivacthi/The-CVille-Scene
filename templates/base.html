@@ -42,14 +42,6 @@
                 <a class="nav-link {% if request.endpoint == 'reviews' %}active{% endif %}" href="{{ url_for('reviews')}}">Reviews</a>
             </li>         
           </ul>
-          <ul class="navbar-nav">
-              <li class="nav-item">
-                  <a class="nav-link" href="#">Login</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="#">Register</a>
-              </li>
-          </ul>
         </div>
       </nav>
       {% block content %}
@@ -70,7 +62,7 @@
   </body>
   <style>
       body {
-        background-color: #fff1dc;
+        background-color: #FFDAB9;
       }
   </style>
 </html>

@@ -5,6 +5,65 @@
 {% endblock %}
 
 {% block content %}
+<style>
+    * {
+  margin: 0;
+  padding: 0;
+}
+body {
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.title{
+    margin-top: 8%;
+    margin-bottom: -4%;
+}
+.line {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.left, .right {
+  width: 50vw;
+  overflow: hidden;
+  display: inline-block;
+}
+.left {
+  color:#FF7F50;
+  transform: skew(0deg, -15deg);
+}
+.right {
+  color: black;
+  transform: skew(0deg, 15deg);
+}
+.left .content {
+  width: 100vw;
+  text-align: center;
+}
+.right .content {
+  width: 100vw;
+  text-align: center;
+  transform: translate(-50vw);
+}
+span {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10vw;
+  text-transform: uppercase;
+  line-height: .8;
+  transition: ease-out .6s;
+}
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  z-index: 1000;
+}
+</style>
+
 <form method="POST">
     <input type="hidden" name="action" value="sort">
     <label for="sortBy">Sort by:</label>
@@ -14,13 +73,53 @@
     </select>
 </form>
 
+<!--Title Animation adapted from https://www.sliderrevolution.com/resources/css-text-animation/ -->
+<div class="title">    
+    <div class="wrap">
+    <div class="line">
+      <div class="left">
+        <div class="content">
+          <span class="spanSlow">Reviews</span>
+        </div>
+      </div><!--
+      --><div class="right">
+        <div class="content">
+          <span class="spanSlow">Reviews</span>
+        </div>
+      </div>
+    </div>
+    <div class="line">
+      <div class="left">
+        <div class="content">
+          <span class="spanSlow"></span>
+        </div>
+      </div><!--
+      --><div class="right">
+        <div class="content">
+          <span class="spanSlow"></span>
+        </div>
+      </div>
+      </div>
+      <div class="line">
+          <div class="left">
+            <div class="content">
+              <span class="spanFast"> </span>
+            </div>
+          </div><!--
+          --><div class="right">
+            <div class="content">
+              <span class="spanFast"> </span>
+            </div>
+          </div>
+        </div>
+</div>
+</div>
+
 <div style="text-align: center; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">  
-    
-    <h1>Submitted Reviews</h1>
-        {% for review in reviews_table %}
-        <div style="text-align: left; min-height: 5vh; border: 2px solid #c47034ad; background-color: #ebdbcf; padding: 15px; border-radius: 10px; width: 100%; max-width: 50%; margin: 15px auto;">
+    {% for review in reviews_table %}
+        <div style="text-align: left; min-height: 5vh; border: 2px solid #c47034ad; background-color: #f9eadf; padding: 15px; border-radius: 10px; width: 100%; max-width: 50%; margin: 15px auto;">
             <strong>{{ review.event_name }}</strong> ({{ review.date }})  
-            <span style="float: right;">⭐ {{ review.rating }}/5</span><br>
+            <span style="float: right; font-size: 1.5em;">⭐ {{ review.rating }}/5</span><br>
             Comments: {{ review.description }}
         </div>
         {% else %}
@@ -28,7 +127,7 @@
         {% endfor %}
         
 
-<div style="border: 2px solid #c47034ad; background-color: #ebdbcf; padding: 30px; border-radius: 12px; width: 80%; max-width: 42%; margin-top: 20px">
+<div style="border: 2px solid #c47034ad; background-color: #f9eadf; padding: 30px; border-radius: 12px; width: 80%; max-width: 42%; margin-top: 20px">
     <h2 style="text-align: center; color: #333; margin-bottom: 20px;"> Add Your Event Review </h2>
     <form method="post" style="display: flex; flex-direction: column; gap: 10px;">
         <input type="hidden" name="action" value="submit_review">
