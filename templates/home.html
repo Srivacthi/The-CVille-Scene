@@ -21,11 +21,11 @@
     }
     .question {
             text-align: center;
-            display: none; /* All questions hidden initially */
+            display: none; 
             margin-top: 20px;
         }
         .question:first-child {
-            display: block; /* First question is visible */
+            display: block; 
         }
         .question-container {
             max-width: 500px;
@@ -138,13 +138,13 @@ nav {
 </div>
 
 <script> 
-      let position = 0; // Initial position
+      let position = 0; 
   const spansSlow = document.querySelectorAll('.spanSlow');
   const spansFast = document.querySelectorAll('.spanFast');
 
   function animateText() {
-    let speedSlow = 100 * Math.sin(position * 0.01); // Slower oscillation
-    let speedFast = 200 * Math.sin(position * 0.01); // Faster oscillation
+    let speedSlow = 100 * Math.sin(position * 0.01);
+    let speedFast = 200 * Math.sin(position * 0.01); 
 
     spansSlow.forEach((span) => {
       span.style.transform = `translate(${speedSlow}px)`;
@@ -154,7 +154,7 @@ nav {
       span.style.transform = `translate(${speedFast}px)`;
     });
 
-    position += 1; // Increment position to keep animation going
+    position += 1; 
     requestAnimationFrame(animateText); // Continuously update animation
   }
 

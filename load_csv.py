@@ -5,9 +5,8 @@ def load_items_from_csv(filename):
     with open(filename, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            # Ensure correct column names (adjust based on actual CSV structure)
             items.append({
-                'name': row.get('Name', 'N/A'),  # Use .get() to avoid KeyError
+                'name': row.get('Name', 'N/A'), 
                 'website': row.get('Website', 'N/A'),
                 'description': row.get('Description', 'N/A'),
                 'category': row.get('Category', 'N/A'),

@@ -19,12 +19,12 @@ def home_page():
     selected_option = None
 
     if request.method == 'POST':
-        selected_option = request.form.get('dropdown_option')  # Store selected value
+        selected_option = request.form.get('dropdown_option')  
 
         if not selected_option:
             return render_template('home.html', selected_option=None)
 
-        #put the selected option in an openAI prompt and get the result
+        #put selected option in openAI prompt and get result
         client = OpenAI()
         completion = client.chat.completions.create(
         model="gpt-4o",
@@ -37,21 +37,17 @@ def home_page():
         ]
         )
 
-        #store the results that openai gave in a .csv file
         openai_response = completion.choices[0].message.content
         match = re.search(r"```.*?\n(.*?)\n```", openai_response, re.DOTALL)
         csv_content = match.group(1) if match else openai_response 
 
 
-        # Define the filename
         csv_filename = "results.csv"
 
-        # Write extracted content to CSV
         with open(csv_filename, mode="w", newline="") as file:
             writer = csv.writer(file)
 
 
-            # Split text into lines and write each as a row
             for line in csv_content.split("\n"):
                 writer.writerow(line.split(","))
 
@@ -64,9 +60,6 @@ def match_results():
     items = load_items_from_csv('results.csv')
     return render_template('match-results.html', items=items)
 
-# @app.route('/reviews')
-# def reviews():
-#     return render_template('reviews.html')
 
 @app.route('/reviews', methods=['GET', 'POST'])
 def reviews():
@@ -81,12 +74,10 @@ def reviews():
             elif sort_by == 'date':
                 reviews_sorted = sorted(reviews_table, key=lambda x: x['date'], reverse=True)
         elif action == 'submit_review':
-            #getting form data
             rating = request.form['rating']
             event_name = request.form['event_name']
             description = request.form['description']
             date = request.form['date']
-            #saving review
             reviews_table.append({
                 'rating': rating,
                 'event_name': event_name,
