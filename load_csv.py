@@ -17,4 +17,4 @@ def load_items_from_csv(filename):
 # Example usage
 filename = 'results.csv'
 items = load_items_from_csv(filename)
-print(items)
+# print(items)
