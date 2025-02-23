@@ -18,6 +18,7 @@ def home_page():
 
     if request.method == 'POST':
         selected_option = request.form.get('dropdown_option')  # Store selected value
+        print(selected_option)
 
         #put the selected option in an openAI prompt and get the result
         client = OpenAI()
@@ -27,7 +28,7 @@ def home_page():
             {"role": "system", "content": "You are a helpful assistant."},
             {
                 "role": "user",
-                "content": "Whare are some " +  selected_option + " in Charlottesville, VA? Can I have an itemized list in the form of a csv file?"
+                "content": "Whare are some " +  selected_option + " in Charlottesville, VA? Can I have an itemized list in the form of a csv file that has 5 features: the name of the place, a link to the place's website, the location, and description, and category?"
             }
         ]
         )
@@ -48,7 +49,6 @@ def home_page():
             # Split text into lines and write each as a row
             for line in csv_content.split("\n"):
                 writer.writerow(line.split(","))
-
 
         print(f"Selected option: {selected_option}")  # Debugging
 
