@@ -128,11 +128,11 @@ nav {
             {% for item in items %}
             <tr>
                 <td><a href="{{ item.website }}" target="_blank" rel="noopener noreferrer">
-                    {{ item.name }}
+                    {{ item.name | trim | trim('"') | trim("'") | trim('"') }}
                     </a>
                 </td>
                 <td>{{ item.description | trim | trim('"') | trim("'") | trim('"') }}</td>
-                <td>{{ item.category }}</td>
+                <td>{{ item.category | trim | trim('"') | trim("'") | trim('"') }}</td>
                 <td>{{ item.location | trim | trim('"') | trim("'") | trim('"') }}</td>
             </tr>
             {% endfor %}
