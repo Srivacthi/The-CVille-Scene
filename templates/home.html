@@ -21,7 +21,7 @@
     }
     .question {
             text-align: center;
-            display: none; 
+            display: none;
             margin-top: 20px;
         }
         .question:first-child {
@@ -138,13 +138,13 @@ nav {
 </div>
 
 <script> 
-      let position = 0; 
+      let position = 0;
   const spansSlow = document.querySelectorAll('.spanSlow');
   const spansFast = document.querySelectorAll('.spanFast');
 
   function animateText() {
-    let speedSlow = 100 * Math.sin(position * 0.01);
-    let speedFast = 200 * Math.sin(position * 0.01); 
+    let speedSlow = 100 * Math.sin(position * 0.01); 
+    let speedFast = 200 * Math.sin(position * 0.01);
 
     spansSlow.forEach((span) => {
       span.style.transform = `translate(${speedSlow}px)`;
@@ -154,8 +154,8 @@ nav {
       span.style.transform = `translate(${speedFast}px)`;
     });
 
-    position += 1; 
-    requestAnimationFrame(animateText); // Continuously update animation
+    position += 1;
+    requestAnimationFrame(animateText); 
   }
 
   animateText(); 
@@ -165,63 +165,166 @@ nav {
   <h1 style="margin: 0; color: #ffffff;">Welcome to The C'Ville Scene!</h1>
 </div>
 <h4 class="heading heading-description">A place where you can discover and plan the next perfect outing in Charlottesville.</h4>
+<br>
+<style>
+    .questions-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background-color: #FF7F50;
+        color: #333; 
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-<div class="form-container">
-    <form method="POST" action="/home">
-        <label for="dropdown_option">Set Your Scene:</label>
-        <select name="dropdown_option" id="dropdown_option">
-            <option value="Restaurants">Restaurants</option>
-            <option value="Parks">Parks</option>
-            <option value="Museums">Museums</option>
-            <option value="Sporting Events">Sporting Events</option >
-            <option value="Art Gallaries">Art Gallaries</option>
-            <option value="Historical Sites">Historical Sites</option>
-        </select>
-        <button type="submit">Submit</button>
-    </form>
+    .question label {
+        font-size: 18px;
+        font-weight: bold;
+        color: #222; 
+        display: block;
+        margin-bottom: 10px;
+    }
 
-    {% if selected_option %}
-        <p>You selected: <strong>{{ selected_option }}</strong></p>
-    {% endif %}
-</div>
+    select, input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: #fff;
+        color: #333; 
+    }
+
+    .question {
+        text-align: center;
+        display: none;
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #ffe2cd;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .question.active {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        background-color: #FF7F50;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #e66b3c;
+    }
+
+    .radio-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        gap: 10px; 
+        width: 100%;
+    }
+
+    .radio-group label {
+        display: flex;
+        align-items: center; 
+        gap: 8px; 
+        font-size: 18px;
+        font-weight: normal;
+        white-space: nowrap;  
+    }
+
+</style>
+
 <div class="questions-container">
-    <form id="questionnaire">
-        <div class="question" id="q1">
-            <label>Number of People?</label><br>
-            <input type="text" id="answer1">
+    <form id="questionnaire" form method="POST" action="/home">
+
+        <div class="question active" id="q1">
+            <label><strong>Set your scene: </strong></label>
+            <select id="place" name="place">
+                <option value="Restaurants">Restaurants</option>
+                <option value="Parks">Parks</option>
+                <option value="Museums">Museums</option>
+                <option value="Sporting Events">Sporting Events</option>
+                <option value="Art Galleries">Art Galleries</option>
+                <option value="Historical Sites">Historical Sites</option>
+                <option value="I don't know">I don't know</option>
+            </select>
             <button type="button" onclick="showNext(2)">Next</button>
         </div>
+        
 
-        <div class="question" id="q2">
-            <label>Do you prefer indoor or outdoor activities?</label><br>
-            <input type="radio" name="activity" value="Indoor"> Indoor<br>
-            <input type="radio" name="activity" value="Outdoor"> Outdoor<br>
-            <input type="radio" name="activity" value="Either"> Either<br>
+        <div class="question active" id="q2">
+            <label><strong>Number of People</strong></label>
+            <input type="text" id="numPeople" name = "numPeople">
             <button type="button" onclick="showNext(3)">Next</button>
         </div>
 
-        <div class="question" id="q3">
-            <label>What's your budget?</label><br>
-            <input type="radio" name="budget" value="Free"> Free<br>
-            <input type="radio" name="budget" value="$20"> Up to $20<br>
-            <input type="radio" name="budget" value="$50"> Up to $50<br>
-            <input type="radio" name="budget" value="$50+"> $50+<br>
+        <div class="question active" id="q3">
+            <label><strong>Do you prefer indoor or outdoor activities?</strong></label>
+        
+            <div class="radio-group">
+                <label for="indoor"><input type="radio" id="indoor" name="activity" value="Indoor"> Indoor</label>
+                <label for="outdoor"><input type="radio" id="outdoor" name="activity" value="Outdoor"> Outdoor</label>
+                <label for="either"><input type="radio" id="either" name="activity" value="Either"> Either</label>
+            </div>
+        
             <button type="button" onclick="showNext(4)">Next</button>
         </div>
-        <div class="question" id="q4">
-            <label>What day and time of day are you planning?</label><br>
-            <input type="datetime-local" id="dateTimePicker">
-            <button type="button" onclick="submitForm()">Submit</button>
+
+        <div class="question active" id="q4">
+            <label><strong>What's your budget?</strong></label>
+        
+            <div class="radio-group">
+                <label for="free"><input type="radio" id="free" name="budget" value="Free"> Free</label>
+                <label for="budget20"><input type="radio" id="budget20" name="budget" value="$20"> Up to $20</label>
+                <label for="budget50"><input type="radio" id="budget50" name="budget" value="$50"> Up to $50</label>
+                <label for="budget50plus"><input type="radio" id="budget50plus" name="budget" value="$50+"> $50+</label>
+            </div>
+        
+            <button type="button" onclick="showNext(5)">Next</button>
         </div>
+        
+
+        <div class="question active" id="q5">
+            <label><strong>What date are you planning for?</strong></label>
+            <input type="datetime-local" id="dateTime" name="dateTime">
+            <button type="submit">Submit</button>
+        </div>        
     </form>
 </div>
+<br>
+<br>
+
 <script>
     function showNext(questionNumber) {
-        document.getElementById('q' + questionNumber).style.display = 'block';
-    }
+        let currentQuestion = document.querySelector('.question.active');
+        let nextQuestion = document.getElementById('q' + questionNumber);
 
-    function submitForm() {
-        alert("Thank you for answering! We will now find the best places for you.");
+        if (currentQuestion && nextQuestion) {
+
+            nextQuestion.style.display = "block";  
+            nextQuestion.classList.add('active');
+
+            nextQuestion.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+            console.error("Question not found: q" + questionNumber);
+        }
     }
 </script>
 {% endblock %}
