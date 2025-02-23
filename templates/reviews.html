@@ -5,5 +5,105 @@
 {% endblock %}
 
 {% block content %}
-    This is the content for the reviews page.
+<style>
+    * {
+  margin: 0;
+  padding: 0;
+}
+body {
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.title{
+    margin-top: 10%;
+}
+.line {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.left, .right {
+  width: 50vw;
+  overflow: hidden;
+  display: inline-block;
+}
+.left {
+  color:#FF7F50;
+  transform: skew(0deg, -15deg);
+}
+.right {
+  color: black;
+  transform: skew(0deg, 15deg);
+}
+.left .content {
+  width: 100vw;
+  text-align: center;
+}
+.right .content {
+  width: 100vw;
+  text-align: center;
+  transform: translate(-50vw);
+}
+span {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10vw;
+  text-transform: uppercase;
+  line-height: .8;
+  transition: ease-out .6s;
+}
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  z-index: 1000;
+</style>
+
+<!--Title Animation adapted from https://www.sliderrevolution.com/resources/css-text-animation/ -->
+<div class="title">    
+    <div class="wrap">
+    <div class="line">
+      <div class="left">
+        <div class="content">
+          <span class="spanSlow">Reviews</span>
+        </div>
+      </div><!--
+      --><div class="right">
+        <div class="content">
+          <span class="spanSlow">Reviews</span>
+        </div>
+      </div>
+    </div>
+    <div class="line">
+      <div class="left">
+        <div class="content">
+          <span class="spanSlow"></span>
+        </div>
+      </div><!--
+      --><div class="right">
+        <div class="content">
+          <span class="spanSlow"></span>
+        </div>
+      </div>
+      </div>
+      <div class="line">
+          <div class="left">
+            <div class="content">
+              <span class="spanFast"> </span>
+            </div>
+          </div><!--
+          --><div class="right">
+            <div class="content">
+              <span class="spanFast"> </span>
+            </div>
+          </div>
+        </div>
+</div>
+</div>
+
+
+
 {% endblock %}

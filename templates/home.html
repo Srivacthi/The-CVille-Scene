@@ -21,6 +21,129 @@
     }
 </style>
 
+<style>
+    * {
+  margin: 0;
+  padding: 0;
+}
+body {
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.title{
+    margin-top: 10%;
+}
+.line {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.left, .right {
+  width: 50vw;
+  overflow: hidden;
+  display: inline-block;
+}
+.left {
+  color:#FF7F50;
+  transform: skew(0deg, -15deg);
+}
+.right {
+  color: black;
+  transform: skew(0deg, 15deg);
+}
+.left .content {
+  width: 100vw;
+  text-align: center;
+}
+.right .content {
+  width: 100vw;
+  text-align: center;
+  transform: translate(-50vw);
+}
+span {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10vw;
+  text-transform: uppercase;
+  line-height: .8;
+  transition: ease-out .6s;
+}
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  z-index: 1000;
+</style>
+
+<!--Title Animation adapted from https://www.sliderrevolution.com/resources/css-text-animation/ -->
+<div class="title">    
+    <div class="wrap">
+    <div class="line">
+      <div class="left">
+        <div class="content">
+          <span class="spanSlow">THE</span>
+        </div>
+      </div><!--
+      --><div class="right">
+        <div class="content">
+          <span class="spanSlow">THE</span>
+        </div>
+      </div>
+    </div>
+    <div class="line">
+      <div class="left">
+        <div class="content">
+          <span class="spanSlow">C'VILLE</span>
+        </div>
+      </div><!--
+      --><div class="right">
+        <div class="content">
+          <span class="spanSlow">C'VILLE</span>
+        </div>
+      </div>
+      </div>
+      <div class="line">
+          <div class="left">
+            <div class="content">
+              <span class="spanFast">SCENE</span>
+            </div>
+          </div><!--
+          --><div class="right">
+            <div class="content">
+              <span class="spanFast">SCENE</span>
+            </div>
+          </div>
+        </div>
+</div>
+</div>
+
+<script> 
+      let position = 0; // Initial position
+  const spansSlow = document.querySelectorAll('.spanSlow');
+  const spansFast = document.querySelectorAll('.spanFast');
+
+  function animateText() {
+    let speedSlow = 100 * Math.sin(position * 0.01); // Slower oscillation
+    let speedFast = 200 * Math.sin(position * 0.01); // Faster oscillation
+
+    spansSlow.forEach((span) => {
+      span.style.transform = `translate(${speedSlow}px)`;
+    });
+
+    spansFast.forEach((span) => {
+      span.style.transform = `translate(${speedFast}px)`;
+    });
+
+    position += 1; // Increment position to keep animation going
+    requestAnimationFrame(animateText); // Continuously update animation
+  }
+
+  animateText(); 
+</script>
+
 <h1 class="heading heading-title">Welcome to The C'Ville Scene!</h1>
 <h4 class="heading heading-description">A place where you can discover and plan the next perfect outing in Charlottesville.</h4>
 
