@@ -42,4 +42,45 @@
         <p>You selected: <strong>{{ selected_option }}</strong></p>
     {% endif %}
 </div>
+<div class="questions-container">
+    <form id="questionnaire">
+        <div class="question" id="q1">
+            <label>Number of People?</label><br>
+            <input type="text" id="answer1">
+            <button type="button" onclick="showNext(2)">Next</button>
+        </div>
+
+        <div class="question" id="q2">
+            <label>Do you prefer indoor or outdoor activities?</label><br>
+            <input type="radio" name="activity" value="Indoor"> Indoor<br>
+            <input type="radio" name="activity" value="Outdoor"> Outdoor<br>
+            <input type="radio" name="activity" value="Either"> Either<br>
+            <button type="button" onclick="showNext(3)">Next</button>
+        </div>
+
+        <div class="question" id="q3">
+            <label>What's your budget?</label><br>
+            <input type="radio" name="budget" value="Free"> Free<br>
+            <input type="radio" name="budget" value="$20"> Up to $20<br>
+            <input type="radio" name="budget" value="$50"> Up to $50<br>
+            <input type="radio" name="budget" value="$50+"> $50+<br>
+            <button type="button" onclick="showNext(4)">Next</button>
+        </div>
+        <div class="question" id="q4">
+            <label>What day and time of day are you planning?</label><br>
+            <input type="text" id="answer4">
+            <button type="button" onclick="submitForm()">Submit</button>
+        </div>
+    </form>
+</div>
+<script>
+    function showNext(questionNumber) {
+        document.getElementById('q' + questionNumber).style.display = 'block';
+    }
+
+    function submitForm() {
+        alert("Thank you for your answers! We will find the best places for you.");
+        // Here, you can send the answers to your backend using AJAX or form submission
+    }
+</script>
 {% endblock %}
