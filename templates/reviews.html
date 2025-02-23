@@ -1,9 +1,48 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Reviews
+    Event Reviews
 {% endblock %}
 
 {% block content %}
-    This is the content for the reviews page.
+<div style="text-align: center; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <h1>Submitted Reviews</h1>
+        {% for review in reviews_table %}
+        <div style="text-align: left; min-height: 5vh; border: 2px solid #c47034ad; background-color: #ebdbcf; padding: 15px; border-radius: 10px; width: 100%; max-width: 600px; margin: 15px auto;">
+            <strong>{{ review.event_name }}</strong> ({{ review.date }})  
+            <span style="float: right;">⭐ {{ review.rating }}/5</span><br>
+            Comments: {{ review.description }}
+        </div>
+        {% else %}
+            <p>No reviews yet. Be the first to add one!</p>
+        {% endfor %}
+
+<div style="border: 2px solid #c47034ad; background-color: #ebdbcf; padding: 30px; border-radius: 12px; width: 100%; max-width: 550px;">
+    <h2 style="text-align: center; color: #333; margin-bottom: 20px;"> Submit Your Event Review </h2>
+    <form method="post" style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; gap: 20px;">
+            <div>
+                <label>Event name:</label>
+                <input type="text" name="event_name" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+            </div>
+            <div>
+                <label>Date you visited:</label>
+                <input type="date" name="date" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+            </div>
+        </div>
+        <div style="display: flex; gap: 20px;">
+            <div>
+                <label>Rating (1-5):</label>
+                <input type="number" name="rating" min="1" max="5" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+            </div>
+            <div style="flex: 2;">
+                <label>Comments:</label>
+                <textarea name="description" rows="4" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; resize: vertical;"></textarea>
+            </div>
+        </div>
+        <button type="submit" style="padding: 12px; border-radius: 6px; background-color: #cb7d08; color: white; border: none; font-size: 16px; cursor: pointer; transition: background-color 0.3s;">
+            Submit Review
+        </button>
+    </form>
+</div>
 {% endblock %}

@@ -11,7 +11,7 @@ load_dotenv()
 app = Flask(__name__)
 app.config['OpenAI_API_KEY'] = os.getenv('OpenAI_API_KEY')
 
-reviews = []
+reviews_table = []
 
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
@@ -64,9 +64,27 @@ def match_results():
     items = load_items_from_csv('results.csv')
     return render_template('match-results.html', items=items)
 
-@app.route('/reviews')
+# @app.route('/reviews')
+# def reviews():
+#     return render_template('reviews.html')
+
+@app.route('/reviews', methods=['GET', 'POST'])
 def reviews():
-    return render_template('reviews.html')
+    if request.method == 'POST':
+        #getting form data
+        rating = request.form['rating']
+        event_name = request.form['event_name']
+        description = request.form['description']
+        date = request.form['date']
+        #saving review
+        reviews_table.append({
+            'rating': rating,
+            'event_name': event_name,
+            'description': description,
+            'date': date
+        })
+        return redirect(url_for('reviews'))
+    return render_template('reviews.html', reviews_table=reviews_table)
 
 if __name__ == '__main__':
     app.run(debug=True)
